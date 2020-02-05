@@ -18,6 +18,14 @@
         <!-- Used as the 'Vendor' for JNLP generation -->
         <name>Your Organisation</name>
     </organization>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.8</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>

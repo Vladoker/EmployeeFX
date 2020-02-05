@@ -1,6 +1,6 @@
 package com.step.employeefx;
 import com.step.employeefx.model.Employee;
-import interfaces.Icontroller;
+import com.step.employeefx.interfaces.Icontroller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;

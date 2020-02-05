@@ -1,6 +1,7 @@
 package com.step.employeefx;
 import com.step.employeefx.model.Employee;
-import interfaces.Icontroller;
+import com.step.employeefx.interfaces.Icontroller;
+import com.step.employeefx.model.ValueDao;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 public class MainController implements Initializable {
     
      private final ObservableList<Employee> mainList = FXCollections.observableArrayList();
+     private final ValueDao dao = new ValueDao();
      
     @FXML
     private TableView<Employee> table;
@@ -58,9 +60,9 @@ public class MainController implements Initializable {
         
         int selectedRow = this.table.getSelectionModel().getSelectedIndex();
         if(selectedRow != -1){
-        EditController controller = new EditController();
-        controller.setSelectedRow(selectedRow);
-        createModal("/fxml/EditScene.fxml", "Edit employee", controller);  
+        EditController editController = new EditController();
+        editController.setSelectedRow(selectedRow);
+        createModal("/fxml/EditScene.fxml", "Edit employee", editController);  
         }
     }
     @FXML
@@ -98,6 +100,7 @@ public class MainController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        dao.getAll(mainList);
         tableName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tabeSurname.setCellValueFactory(new PropertyValueFactory<>("surname"));
         tableGender.setCellValueFactory(new PropertyValueFactory<>("sex"));
