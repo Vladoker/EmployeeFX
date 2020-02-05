@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -17,10 +18,11 @@ import javafx.stage.Stage;
  *
  * @author Vladislav
  */
-public class AddController implements Initializable,Icontroller {
+public class EditController implements Initializable,Icontroller {
 
     private ObservableList<Employee> list;
     private ToggleGroup group = new ToggleGroup();
+    private int selectedRow;
  
     @FXML
     private TextField textFieldName;
@@ -36,7 +38,7 @@ public class AddController implements Initializable,Icontroller {
  
     @FXML
     private TextField textFieldDate;
-
+ 
     @FXML
     private TextField textFieldSalary;
 
@@ -45,7 +47,8 @@ public class AddController implements Initializable,Icontroller {
   
 
     @FXML
-    public void btnEventAdd(ActionEvent event) {
+    public void btnEventEdit(ActionEvent event) {
+        
         String name = textFieldName.getText().trim();
         String surname = textFieldSurname.getText().trim();
         String date = textFieldDate.getText().trim();
@@ -55,7 +58,7 @@ public class AddController implements Initializable,Icontroller {
         String address = textFieldAddress.getText();
 
         Employee emp = new Employee(name, surname, gender, date, address, salary);
-        list.add(emp);
+        list.set(this.selectedRow, emp);
         
         closeStage(event);
     }
@@ -63,14 +66,32 @@ public class AddController implements Initializable,Icontroller {
     @Override
     public void updateColection(ObservableList<Employee> obj){
         this.list = obj;
+        
+        Employee emp = list.get(this.selectedRow);
+        
+         textFieldName.setText(emp.getName());
+         textFieldSurname.setText(emp.getSurname());
+         textFieldDate.setText(emp.getDate());
+         textFieldSalary.setText(String.valueOf(emp.getSalary()));
+         textFieldAddress.setText(emp.getAddress());
+         if(emp.getSex().equalsIgnoreCase("Male")){
+             btnMale.fire();
+         }
+         else btnFemale.fire();
+         
+         
     }
     
     
-     public void closeStage(ActionEvent event) {
+    private void closeStage(ActionEvent event) {
         Node source = (Node)  event.getSource(); 
         Stage stage  = (Stage)source.getScene().getWindow();
         stage.close();
     }  
+    
+    public void setSelectedRow(int selectedRow){
+        this.selectedRow = selectedRow;
+    }
     
     
     @Override

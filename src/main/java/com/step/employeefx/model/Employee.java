@@ -40,8 +40,8 @@ public class Employee {
 
     
     public String toString() {
-        return "Name: " + name.get() + "\r\nSurname: " + surname.get() + "\r\nSex: " + sex.get() + "\r\nAddress: " + address + "\r\nSalary: " + salary.get() +
-               "\r\n " + date.get();
+        return "Name: " + name.get() + "\r\nSurname: " + surname.get() + "\r\nSex: " + sex.get() + "\r\nAddress: " + address.get() + "\r\nSalary: " + salary.get() +
+               "\r\nDate: " + date.get();
     }
 
 
