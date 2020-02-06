@@ -1,6 +1,7 @@
 package com.step.employeefx;
 import com.step.employeefx.model.Employee;
 import com.step.employeefx.interfaces.Icontroller;
+import com.step.employeefx.model.ValueDao;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
@@ -21,6 +22,7 @@ public class AddController implements Initializable,Icontroller {
 
     private ObservableList<Employee> list;
     private ToggleGroup group = new ToggleGroup();
+    private ValueDao dao = new ValueDao();
  
     @FXML
     private TextField textFieldName;
@@ -56,6 +58,8 @@ public class AddController implements Initializable,Icontroller {
 
         Employee emp = new Employee(name, surname, gender, date, address, salary);
         list.add(emp);
+        
+        dao.addEmp(emp);
         
         closeStage(event);
     }
